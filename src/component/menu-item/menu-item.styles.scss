@@ -1,0 +1,87 @@
+@mixin border($color) {
+  border: 1px solid $color;
+}
+
+.menu-item {
+  min-width: 30%;
+  height: 24rem;
+  margin: 0.75rem;
+  color: white;
+  // text-shadow: 0px -1px 20px black;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto; // flex-grow, flex-shrink, flex-basis
+  flex-wrap: wrap;
+
+  position: relative;
+
+  overflow: hidden;
+
+  border: 1px solid transparent; // to prevent moving on hover
+
+  .background-image {
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  &.large {
+    height: 35rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid rgb(79, 79, 79);
+
+    & .background-image {
+      transform: scale(1.05);
+      transition: 0.6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
+    }
+
+    & .shadow {
+      background-color: rgba(0, 0, 0, 0.85);
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  position: relative;
+
+  .title,
+  .subtitle {
+    z-index: 2;
+  }
+
+  .title {
+    letter-spacing: 0.35rem;
+    margin-bottom: 0.3rem;
+  }
+}
+
+.shadow {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  width: 100%;
+  height: 100%;
+  min-width: 8rem;
+  z-index: 1;
+  transform: scale(1.6, 1.5);
+}
+
+// Create stacked view when on small devices. Items become bigger than shrink.
+@media screen and (max-width: 630px) {
+  .menu-item {
+    flex-basis: 100rem;
+  }
+}
